@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>社内勉強会｜コーディネーション・合意形成スキル</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Shippori+Mincho:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1814;
+    --paper: #f5f0e8;
+    --accent: #8b2e2e;
+    --accent-light: #c4604a;
+    --gold: #b8933a;
+    --muted: #6b6560;
+    --border: #d4ccc0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Serif JP', serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* 背景テクスチャ */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,0,0,0.03) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,0,0,0.02) 40px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ヘッダー */
+  header {
+    padding: 60px 0 40px;
+    text-align: center;
+    border-bottom: 2px solid var(--ink);
+    position: relative;
+  }
+
+  .label {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: block;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+
+  h1 {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 800;
+    line-height: 1.3;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .subtitle {
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  /* メタ情報 */
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 40px 0;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  .meta-item {
+    background: var(--paper);
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .meta-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+  }
+
+  .meta-value {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* セクション */
+  section {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .section-num {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    min-width: 40px;
+  }
+
+  .section-title {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* 概要テキスト */
+  .overview-text {
+    font-size: 15px;
+    line-height: 2;
+    color: #3a3530;
+  }
+
+  /* プログラム */
+  .program-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .program-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px dashed var(--border);
+    align-items: start;
+  }
+
+  .program-time {
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    padding-top: 2px;
+  }
+
+  .program-content {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .program-content strong {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .program-content span {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* ターゲット */
+  .target-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .target-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .target-item::before {
+    content: '●';
+    color: var(--accent);
+    font-size: 8px;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  /* ===== クイズセクション ===== */
+  .quiz-section {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 60px 0;
+    margin: 48px -24px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .quiz-section::before {
+    content: 'QUIZ';
+    position: absolute;
+    top: -20px;
+    right: 40px;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 120px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .quiz-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .quiz-intro {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .quiz-intro .label {
+    color: var(--gold);
+    animation: none;
+    opacity: 1;
+  }
+
+  .quiz-intro h2 {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 24px;
+    font-weight: 800;
+    margin-top: 12px;
+    letter-spacing: 0.08em;
+  }
+
+  .quiz-intro p {
+    margin-top: 12px;
+    font-size: 13px;
+    color: rgba(245,240,232,0.6);
+    letter-spacing: 0.1em;
+  }
+
+  /* 進捗 */
+  .quiz-progress {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+
+  .progress-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    transition: background 0.3s ease;
+  }
+
+  .progress-dot.active { background: var(--gold); }
+  .progress-dot.done { background: rgba(255,255,255,0.5); }
+
+  /* 問題カード */
+  .quiz-card {
+    display: none;
+    animation: fadeUp 0.5s ease;
+  }
+
+  .quiz-card.active { display: block; }
+
+  .question-label {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .question-text {
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(16px, 3vw, 22px);
+    font-weight: 600;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    letter-spacing: 0.05em;
+  }
+
+  .quiz-scenario {
+    background: rgba(255,255,255,0.06);
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px;
+    margin-bottom: 28px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: rgba(245,240,232,0.8);
+    font-style: italic;
+  }
+
+  .options-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .option-btn {
+    width: 100%;
+    padding: 16px 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--paper);
+    font-family: 'Noto Serif JP', serif;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .option-btn:hover:not(:disabled) {
+    background: rgba(184,147,58,0.15);
+    border-color: var(--gold);
+  }
+
+  .option-btn .opt-key {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    min-width: 20px;
+    margin-top: 2px;
+  }
+
+  .option-btn.correct {
+    background: rgba(80,140,80,0.2);
+    border-color: #7ab87a;
+  }
+
+  .option-btn.incorrect {
+    background: rgba(180,60,60,0.2);
+    border-color: #c47a7a;
+  }
+
+  .option-btn.reveal-correct {
+    background: rgba(80,140,80,0.1);
+    border-color: rgba(122,184,122,0.4);
+  }
+
+  .option-btn:disabled { cursor: default; }
+
+  /* フィードバック */
+  .feedback {
+    display: none;
+    margin-top: 24px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.04);
+  }
+
+  .feedback.show { display: block; animation: fadeUp 0.4s ease; }
+
+  .feedback-verdict {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .feedback-verdict.ok { color: #7ab87a; }
+  .feedback-verdict.ng { color: #e88; }
+
+  .feedback-text {
+    font-size: 13px;
+    line-height: 1.9;
+    color: rgba(245,240,232,0.75);
+  }
+
+  .next-btn {
+    margin-top: 20px;
+    padding: 12px 32px;
+    background: var(--gold);
+    color: var(--ink);
+    border: none;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .next-btn:hover { opacity: 0.85; }
+
+  /* 結果 */
+  .result-card {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+    animation: fadeUp 0.6s ease;
+  }
+
+  .result-card.show { display: block; }
+
+  .result-score {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 72px;
+    font-weight: 800;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .result-label {
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: rgba(245,240,232,0.5);
+    margin-bottom: 24px;
+  }
+
+  .result-type {
+    font-family: 'Shippori Mincho', serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    letter-spacing: 0.08em;
+  }
+
+  .result-desc {
+    font-size: 14px;
+    line-height: 2;
+    color: rgba(245,240,232,0.75);
+    max-width: 500px;
+    margin: 0 auto 32px;
+  }
+
+  .result-cta {
+    display: inline-block;
+    padding: 14px 40px;
+    background: var(--gold);
+    color: var(--ink);
+    font-family: 'Shippori Mincho', serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .result-cta:hover { opacity: 0.85; }
+
+  .retry-btn {
+    display: block;
+    margin: 16px auto 0;
+    background: none;
+    border: none;
+    color: rgba(245,240,232,0.4);
+    font-family: 'Noto Serif JP', serif;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  /* フッター */
+  footer {
+    text-align: center;
+    padding: 40px 0;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* アニメーション */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* レスポンシブ */
+  @media (max-width: 600px) {
+    .meta-grid { grid-template-columns: 1fr 1fr; }
+    .program-item { grid-template-columns: 60px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ヘッダー -->
+<div class="container">
+  <header>
+    <span class="label">社内勉強会 / Study Session</span>
+    <h1>コーディネーション・<br>合意形成スキル</h1>
+    <p class="subtitle">チームで決める力を、もう一段階引き上げる</p>
+  </header>
+
+  <!-- メタ情報 -->
+  <div class="meta-grid">
+    <div class="meta-item">
+      <span class="meta-label">DATE</span>
+      <span class="meta-value">2025年 ○月 ○日（○）</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">TIME</span>
+      <span class="meta-value">○○:00 〜 ○○:00（約2時間）</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">FORMAT</span>
+      <span class="meta-value">オンライン（Jitsi Meet）</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">TARGET</span>
+      <span class="meta-value">Create Team 1 / Team 2</span>
+    </div>
+  </div>
+
+  <!-- 概要 -->
+  <section id="s1">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">開催背景</span>
+      <div class="section-line"></div>
+    </div>
+    <p class="overview-text">
+      社内アンケートの結果、「コーディネーション・合意形成」に関するスキルは、
+      チーム全体で強化が必要な領域として浮かび上がりました。<br><br>
+      複数の関係者を巻き込んでプロジェクトを進める場面や、異なる意見を持つメンバー間で
+      着地点を見つける場面は、日常業務のあらゆるシーンに存在します。
+      本勉強会では、実際の業務シナリオをもとに、明日から使えるスキルの習得を目指します。
+    </p>
+  </section>
+
+  <!-- プログラム -->
+  <section id="s2">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">プログラム</span>
+      <div class="section-line"></div>
+    </div>
+    <ul class="program-list">
+      <li class="program-item">
+        <span class="program-time">00:00〜</span>
+        <div class="program-content">
+          <strong>イントロダクション</strong>
+          <span>勉強会の目的・進め方の説明（約10分）</span>
+        </div>
+      </li>
+      <li class="program-item">
+        <span class="program-time">00:10〜</span>
+        <div class="program-content">
+          <strong>インプット：コーディネーションの基本構造</strong>
+          <span>合意形成のプロセスと、よくある失敗パターンを整理します（約30分）</span>
+        </div>
+      </li>
+      <li class="program-item">
+        <span class="program-time">00:40〜</span>
+        <div class="program-content">
+          <strong>ケーススタディ：業務シナリオ演習</strong>
+          <span>実際の業務に近い場面を想定した演習とペアレビュー（約50分）</span>
+        </div>
+      </li>
+      <li class="program-item">
+        <span class="program-time">01:30〜</span>
+        <div class="program-content">
+          <strong>全体共有・振り返り</strong>
+          <span>気づきの共有と、翌日から活用できるアクションを整理します（約30分）</span>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 対象者 -->
+  <section id="s3">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">こんな方に特におすすめ</span>
+      <div class="section-line"></div>
+    </div>
+    <ul class="target-list">
+      <li class="target-item">会議や打ち合わせで、なかなか結論が出ないと感じることがある</li>
+      <li class="target-item">関係者間の意見の相違をどう調整すべきか迷うことがある</li>
+      <li class="target-item">上流工程や SE 職へのキャリアアップを検討している</li>
+      <li class="target-item">自分のコーディネーション力の現状を客観的に把握したい</li>
+    </ul>
+  </section>
+</div>
+
+<!-- クイズセクション -->
+<div class="quiz-section">
+  <div class="quiz-inner">
+    <div class="quiz-intro">
+      <span class="label">Self Check Quiz</span>
+      <h2>あなたのコーディネーション力を診断する</h2>
+      <p>3問の実践シナリオ問題に答えてください</p>
+    </div>
+
+    <div class="quiz-progress" id="progressDots"></div>
+
+    <!-- Q1 -->
+    <div class="quiz-card active" id="q1">
+      <div class="question-label">QUESTION 01 / 03</div>
+      <p class="question-text">プロジェクト定例会で、営業とエンジニアの意見が真っ向から対立しています。あなたはどう動きますか？</p>
+      <div class="quiz-scenario">
+        「この機能は絶対に今週リリースしてほしい」（営業）<br>
+        「品質が担保できない状態でのリリースは無理です」（エンジニア）<br>
+        ── 会議は膠着状態。ファシリテーターはあなた。
+      </div>
+      <ul class="options-list">
+        <li><button class="option-btn" data-q="1" data-opt="A">
+          <span class="opt-key">A</span>
+          <span>どちらか一方の判断を仰ぐため、その場で上長に電話する</span>
+        </button></li>
+        <li><button class="option-btn" data-q="1" data-opt="B">
+          <span class="opt-key">B</span>
+          <span>双方の「本当の懸念点」を引き出し、部分リリースや暫定対応など第三の選択肢を探る</span>
+        </button></li>
+        <li><button class="option-btn" data-q="1" data-opt="C">
+          <span class="opt-key">C</span>
+          <span>多数決で決める</span>
+        </button></li>
+        <li><button class="option-btn" data-q="1" data-opt="D">
+          <span class="opt-key">D</span>
+          <span>結論を次回以降に持ち越し、会議をいったん終了させる</span>
+        </button></li>
+      </ul>
+      <div class="feedback" id="fb1">
+        <div class="feedback-verdict" id="fv1"></div>
+        <p class="feedback-text" id="ft1"></p>
+        <button class="next-btn" onclick="nextQuestion(2)">次の問題へ →</button>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="quiz-card" id="q2">
+      <div class="question-label">QUESTION 02 / 03</div>
+      <p class="question-text">ステークホルダーへの合意形成で最も重要なタイミングはどれでしょうか？</p>
+      <div class="quiz-scenario">
+        新しい業務フローの変更を、関係部門 3 部署に承認してもらう必要があります。
+        どのタイミングで合意を取りにいくのが最も効果的ですか？
+      </div>
+      <ul class="options-list">
+        <li><button class="option-btn" data-q="2" data-opt="A">
+          <span class="opt-key">A</span>
+          <span>全員が揃う大きな会議の場で、一度に提案・承認してもらう</span>
+        </button></li>
+        <li><button class="option-btn" data-q="2" data-opt="B">
+          <span class="opt-key">B</span>
+          <span>提案を完成させてから、メールで全員に一斉送信する</span>
+        </button></li>
+        <li><button class="option-btn" data-q="2" data-opt="C">
+          <span class="opt-key">C</span>
+          <span>大きな会議の前に、各部署の担当者と個別に話し合い、懸念点を把握・調整しておく</span>
+        </button></li>
+        <li><button class="option-btn" data-q="2" data-opt="D">
+          <span class="opt-key">D</span>
+          <span>変更を先に実施し、後から報告する</span>
+        </button></li>
+      </ul>
+      <div class="feedback" id="fb2">
+        <div class="feedback-verdict" id="fv2"></div>
+        <p class="feedback-text" id="ft2"></p>
+        <button class="next-btn" onclick="nextQuestion(3)">次の問題へ →</button>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="quiz-card" id="q3">
+      <div class="question-label">QUESTION 03 / 03</div>
+      <p class="question-text">合意後に「聞いていなかった」と言い出す関係者が出た場合、根本的な原因として最も考えられるものはどれでしょうか？</p>
+      <div class="quiz-scenario">
+        先月の会議で全員合意したはずの仕様変更について、今になって
+        「その内容は聞いていなかった」という声が上がりました。
+      </div>
+      <ul class="options-list">
+        <li><button class="option-btn" data-q="3" data-opt="A">
+          <span class="opt-key">A</span>
+          <span>言い出した人の記憶違い・確認不足</span>
+        </button></li>
+        <li><button class="option-btn" data-q="3" data-opt="B">
+          <span class="opt-key">B</span>
+          <span>合意内容の文書化・共有が不十分だった</span>
+        </button></li>
+        <li><button class="option-btn" data-q="3" data-opt="C">
+          <span class="opt-key">C</span>
+          <span>会議の参加者が多すぎた</span>
+        </button></li>
+        <li><button class="option-btn" data-q="3" data-opt="D">
+          <span class="opt-key">D</span>
+          <span>会議の開催頻度が低すぎた</span>
+        </button></li>
+      </ul>
+      <div class="feedback" id="fb3">
+        <div class="feedback-verdict" id="fv3"></div>
+        <p class="feedback-text" id="ft3"></p>
+        <button class="next-btn" onclick="showResult()">結果を見る →</button>
+      </div>
+    </div>
+
+    <!-- 結果 -->
+    <div class="result-card" id="resultCard">
+      <div class="result-score" id="resultScore"></div>
+      <div class="result-label">SCORE / 3問中</div>
+      <div class="result-type" id="resultType"></div>
+      <p class="result-desc" id="resultDesc"></p>
+      <a href="#" class="result-cta">この勉強会に参加する →</a>
+      <button class="retry-btn" onclick="retryQuiz()">もう一度挑戦する</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- フッター -->
+<footer>
+  <div class="container">
+    <p>主催：社内研修担当 / Create Division　　お問い合わせは社内チャットまで</p>
+  </div>
+</footer>
+
+<script>
+  // クイズデータ
+  const quizData = {
+    1: {
+      correct: 'B',
+      feedback: {
+        A: { ok: false, text: '上長への即時エスカレーションは、ファシリテーターとしての機能を放棄することになります。まずは自分で場を整理する動きが求められます。' },
+        B: { ok: true,  text: '正解です。対立の背景にある「真の懸念点」を可視化し、双方が納得できる第三の選択肢を探ることが、コーディネーターの核心的な役割です。' },
+        C: { ok: false, text: '多数決は意思決定を速めますが、少数意見を切り捨てることになり、後の抵抗や手戻りにつながりやすい手法です。' },
+        D: { ok: false, text: '先送りは問題を温存するだけです。少なくとも「次回までに各自が整理すべきこと」を明確にして会議を締めることが必要です。' },
+      }
+    },
+    2: {
+      correct: 'C',
+      feedback: {
+        A: { ok: false, text: '大きな会議の場での初出し提案は、参加者が準備できておらず反発を招きやすい。「根回し」は日本のビジネス文化における重要なコーディネーション技法です。' },
+        B: { ok: false, text: 'メール一斉送信は情報共有としては有効ですが、合意形成とは異なります。受け取り側が「読んでいない」「内容を理解していない」まま進むリスクがあります。' },
+        C: { ok: true,  text: '正解です。事前の個別調整（いわゆる根回し）により、各関係者の懸念点を把握・反映した上で臨む大きな場は、スムーズな合意につながります。' },
+        D: { ok: false, text: '事後報告は合意形成ではありません。関係者の反発と手戻りコストを招く最もリスクの高い選択肢です。' },
+      }
+    },
+    3: {
+      correct: 'B',
+      feedback: {
+        A: { ok: false, text: '個人の記憶違いを原因とすると、再発防止につながりません。プロセスの問題として捉えることが重要です。' },
+        B: { ok: true,  text: '正解です。「合意した」という事実は、文書化・共有・確認のセットで初めて完結します。議事録の送付と確認期限の設定が再発防止の基本です。' },
+        C: { ok: false, text: '参加者数が一因になることもありますが、根本はコミュニケーション・記録のプロセス設計にあります。' },
+        D: { ok: false, text: '会議頻度と合意の品質は直接的には関係しません。1回の会議でも適切に記録・共有すれば問題は防げます。' },
+      }
+    }
+  };
+
+  let score = 0;
+  let currentQ = 1;
+  const answers = {};
+
+  // 進捗ドット初期化
+  function initDots() {
+    const container = document.getElementById('progressDots');
+    container.innerHTML = '';
+    for (let i = 1; i <= 3; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'progress-dot' + (i === 1 ? ' active' : '');
+      dot.id = 'dot' + i;
+      container.appendChild(dot);
+    }
+  }
+
+  function updateDots(q) {
+    for (let i = 1; i <= 3; i++) {
+      const dot = document.getElementById('dot' + i);
+      dot.className = 'progress-dot' + (i < q ? ' done' : i === q ? ' active' : '');
+    }
+  }
+
+  // 選択肢クリック
+  document.querySelectorAll('.option-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const q = parseInt(this.dataset.q);
+      const opt = this.dataset.opt;
+      if (answers[q]) return;
+
+      answers[q] = opt;
+      const data = quizData[q];
+      const isCorrect = opt === data.correct;
+      if (isCorrect) score++;
+
+      // ボタン色付け
+      document.querySelectorAll(`.option-btn[data-q="${q}"]`).forEach(b => {
+        b.disabled = true;
+        if (b.dataset.opt === data.correct) b.classList.add('correct');
+        else if (b.dataset.opt === opt && !isCorrect) b.classList.add('incorrect');
+      });
+
+      // フィードバック表示
+      const fb = document.getElementById('fb' + q);
+      const fv = document.getElementById('fv' + q);
+      const ft = document.getElementById('ft' + q);
+      fv.textContent = isCorrect ? '✓ 正解です' : '✗ 不正解';
+      fv.className = 'feedback-verdict ' + (isCorrect ? 'ok' : 'ng');
+      ft.textContent = data.feedback[opt].text;
+      fb.classList.add('show');
+    });
+  });
+
+  function nextQuestion(n) {
+    document.getElementById('q' + (n - 1)).classList.remove('active');
+    document.getElementById('q' + n).classList.add('active');
+    currentQ = n;
+    updateDots(n);
+    window.scrollTo({ top: document.querySelector('.quiz-section').offsetTop - 20, behavior: 'smooth' });
+  }
+
+  function showResult() {
+    document.getElementById('q3').classList.remove('active');
+    document.getElementById('progressDots').style.display = 'none';
+
+    const card = document.getElementById('resultCard');
+    card.classList.add('show');
+
+    document.getElementById('resultScore').textContent = score;
+
+    let type, desc;
+    if (score === 3) {
+      type = '熟練のコーディネーター型';
+      desc = '3問すべて正解です。合意形成の基本原則をしっかり押さえています。本勉強会では、さらに複雑なマルチステークホルダー場面の応用スキルを学びましょう。';
+    } else if (score === 2) {
+      type = '実践経験者型';
+      desc = '概ねコーディネーションの勘所を掴んでいます。あと一歩の理解で、より確実に合意を引き出せるようになります。本勉強会で弱点を補強しましょう。';
+    } else if (score === 1) {
+      type = '成長フェーズ型';
+      desc = 'コーディネーションへの意識はあるものの、場面に応じた手法の選択に伸びしろがあります。本勉強会で体系的なフレームワークを学ぶことで、大きく変わります。';
+    } else {
+      type = 'スキルアップ候補者型';
+      desc = '今まさに学ぶタイミングです。本勉強会は、コーディネーション・合意形成の基礎から実践まで、一から丁寧に学べる内容になっています。ぜひご参加ください。';
+    }
+
+    document.getElementById('resultType').textContent = type;
+    document.getElementById('resultDesc').textContent = desc;
+
+    window.scrollTo({ top: document.querySelector('.quiz-section').offsetTop - 20, behavior: 'smooth' });
+  }
+
+  function retryQuiz() {
+    score = 0;
+    Object.keys(answers).forEach(k => delete answers[k]);
+
+    document.getElementById('resultCard').classList.remove('show');
+    document.getElementById('progressDots').style.display = 'flex';
+    document.querySelectorAll('.quiz-card').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.option-btn').forEach(b => {
+      b.disabled = false;
+      b.className = 'option-btn';
+    });
+    document.querySelectorAll('.feedback').forEach(f => f.classList.remove('show'));
+    document.getElementById('q1').classList.add('active');
+    currentQ = 1;
+    initDots();
+  }
+
+  // スクロールアニメーション
+  const sections = document.querySelectorAll('section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  sections.forEach(s => observer.observe(s));
+
+  // 初期化
+  initDots();
+</script>
+</body>
+</html>
