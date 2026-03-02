@@ -13,7 +13,6 @@
       --ink: #1a1814;
       --paper: #f5f0e8;
       --accent: #8b2e2e;
-      --accent-light: #c4604a;
       --gold: #b8933a;
       --muted: #6b6560;
       --border: #d4ccc0;
@@ -37,9 +36,7 @@
       content: '';
       position: fixed;
       inset: 0;
-      background-image:
-        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0, 0, 0, 0.03) 40px),
-        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0, 0, 0, 0.02) 40px);
+      background-image: repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0, 0, 0, 0.03) 40px), repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0, 0, 0, 0.02) 40px);
       pointer-events: none;
       z-index: 0;
     }
@@ -56,7 +53,6 @@
       padding: 60px 0 40px;
       text-align: center;
       border-bottom: 2px solid var(--ink);
-      position: relative;
     }
 
     .label {
@@ -230,7 +226,7 @@
       flex-shrink: 0;
     }
 
-    /* ===== 参加セクション ===== */
+    /* 参加セクション */
     .join-section {
       padding: 64px 0;
       text-align: center;
@@ -268,7 +264,6 @@
       margin-bottom: 36px;
     }
 
-    /* 参加人数カウンター */
     .join-counter {
       display: inline-flex;
       align-items: baseline;
@@ -295,7 +290,6 @@
       letter-spacing: 0.15em;
     }
 
-    /* 参加ボタン */
     .join-btn {
       display: inline-block;
       padding: 18px 56px;
@@ -361,7 +355,7 @@
       letter-spacing: 0.1em;
     }
 
-    /* ===== クイズセクション ===== */
+    /* クイズ */
     .quiz-section {
       background: var(--ink);
       color: var(--paper);
@@ -620,7 +614,6 @@
       margin: 0 auto 32px;
     }
 
-    /* 結果画面の参加ボタン（クイズ内） */
     .result-cta {
       display: inline-block;
       padding: 14px 40px;
@@ -632,8 +625,6 @@
       letter-spacing: 0.15em;
       text-decoration: none;
       transition: opacity 0.2s;
-      cursor: pointer;
-      border: none;
     }
 
     .result-cta:hover {
@@ -697,81 +688,50 @@
     </header>
 
     <div class="meta-grid">
-      <div class="meta-item">
-        <span class="meta-label">DATE</span>
-        <span class="meta-value">2025年 ○月 ○日（○）</span>
+      <div class="meta-item"><span class="meta-label">DATE</span><span class="meta-value">2025年 ○月 ○日（○）</span></div>
+      <div class="meta-item"><span class="meta-label">TIME</span><span class="meta-value">○○:00 〜 ○○:00（約2時間）</span>
       </div>
-      <div class="meta-item">
-        <span class="meta-label">TIME</span>
-        <span class="meta-value">○○:00 〜 ○○:00（約2時間）</span>
+      <div class="meta-item"><span class="meta-label">FORMAT</span><span class="meta-value">オンライン（Jitsi Meet）</span>
       </div>
-      <div class="meta-item">
-        <span class="meta-label">FORMAT</span>
-        <span class="meta-value">オンライン（Jitsi Meet）</span>
-      </div>
-      <div class="meta-item">
-        <span class="meta-label">TARGET</span>
-        <span class="meta-value">Create Team 1 / Team 2</span>
-      </div>
+      <div class="meta-item"><span class="meta-label">TARGET</span><span class="meta-value">Create Team 1 / Team
+          2</span></div>
     </div>
 
     <section id="s1">
-      <div class="section-header">
-        <span class="section-num">01</span>
-        <span class="section-title">開催背景</span>
+      <div class="section-header"><span class="section-num">01</span><span class="section-title">開催背景</span>
         <div class="section-line"></div>
       </div>
       <p class="overview-text">
-        社内アンケートの結果、「コーディネーション・合意形成」に関するスキルは、
-        チーム全体で強化が必要な領域として浮かび上がりました。<br><br>
-        複数の関係者を巻き込んでプロジェクトを進める場面や、異なる意見を持つメンバー間で
-        着地点を見つける場面は、日常業務のあらゆるシーンに存在します。
-        本勉強会では、実際の業務シナリオをもとに、明日から使えるスキルの習得を目指します。
+        社内アンケートの結果、「コーディネーション・合意形成」に関するスキルは、チーム全体で強化が必要な領域として浮かび上がりました。<br><br>
+        複数の関係者を巻き込んでプロジェクトを進める場面や、異なる意見を持つメンバー間で着地点を見つける場面は、日常業務のあらゆるシーンに存在します。本勉強会では、実際の業務シナリオをもとに、明日から使えるスキルの習得を目指します。
       </p>
     </section>
 
     <section id="s2">
-      <div class="section-header">
-        <span class="section-num">02</span>
-        <span class="section-title">プログラム</span>
+      <div class="section-header"><span class="section-num">02</span><span class="section-title">プログラム</span>
         <div class="section-line"></div>
       </div>
       <ul class="program-list">
-        <li class="program-item">
-          <span class="program-time">00:00〜</span>
+        <li class="program-item"><span class="program-time">00:00〜</span>
+          <div class="program-content"><strong>イントロダクション</strong><span>勉強会の目的・進め方の説明（約10分）</span></div>
+        </li>
+        <li class="program-item"><span class="program-time">00:10〜</span>
           <div class="program-content">
-            <strong>イントロダクション</strong>
-            <span>勉強会の目的・進め方の説明（約10分）</span>
+            <strong>インプット：コーディネーションの基本構造</strong><span>合意形成のプロセスと、よくある失敗パターンを整理します（約30分）</span>
           </div>
         </li>
-        <li class="program-item">
-          <span class="program-time">00:10〜</span>
-          <div class="program-content">
-            <strong>インプット：コーディネーションの基本構造</strong>
-            <span>合意形成のプロセスと、よくある失敗パターンを整理します（約30分）</span>
+        <li class="program-item"><span class="program-time">00:40〜</span>
+          <div class="program-content"><strong>ケーススタディ：業務シナリオ演習</strong><span>実際の業務に近い場面を想定した演習とペアレビュー（約50分）</span>
           </div>
         </li>
-        <li class="program-item">
-          <span class="program-time">00:40〜</span>
-          <div class="program-content">
-            <strong>ケーススタディ：業務シナリオ演習</strong>
-            <span>実際の業務に近い場面を想定した演習とペアレビュー（約50分）</span>
-          </div>
-        </li>
-        <li class="program-item">
-          <span class="program-time">01:30〜</span>
-          <div class="program-content">
-            <strong>全体共有・振り返り</strong>
-            <span>気づきの共有と、翌日から活用できるアクションを整理します（約30分）</span>
-          </div>
+        <li class="program-item"><span class="program-time">01:30〜</span>
+          <div class="program-content"><strong>全体共有・振り返り</strong><span>気づきの共有と、翌日から活用できるアクションを整理します（約30分）</span></div>
         </li>
       </ul>
     </section>
 
     <section id="s3">
-      <div class="section-header">
-        <span class="section-num">03</span>
-        <span class="section-title">こんな方に特におすすめ</span>
+      <div class="section-header"><span class="section-num">03</span><span class="section-title">こんな方に特におすすめ</span>
         <div class="section-line"></div>
       </div>
       <ul class="target-list">
@@ -782,27 +742,20 @@
       </ul>
     </section>
 
-    <!-- ===== 参加セクション ===== -->
+    <!-- 参加セクション -->
     <div class="join-section" id="joinSection">
       <span class="join-label">PARTICIPATION</span>
       <h2 class="join-title">参加を表明する</h2>
       <p class="join-desc">ボタンを押すだけで参加意思を登録できます</p>
-
       <div class="join-counter">
         <span class="join-counter-num" id="joinCount">—</span>
         <span class="join-counter-unit">名が参加表明済み</span>
       </div>
-
       <br>
-
-      <button class="join-btn" id="joinBtn" onclick="handleJoin()">
-        <span>参加する</span>
-      </button>
-
+      <button class="join-btn" id="joinBtn" onclick="handleJoin()"><span>参加する</span></button>
       <p class="join-done-msg" id="joinDoneMsg">✓ 参加表明を受け付けました</p>
       <p class="join-note">※ 同一ブラウザからの二重登録は防止されています</p>
     </div>
-
   </div>
 
   <!-- クイズセクション -->
@@ -814,18 +767,13 @@
           <h2>あなたのコーディネーション力を診断する</h2>
           <p>3問の実践シナリオ問題に答えてください</p>
         </div>
-
         <div class="quiz-progress" id="progressDots"></div>
 
-        <!-- Q1 -->
         <div class="quiz-card active" id="q1">
           <div class="question-label">QUESTION 01 / 03</div>
           <p class="question-text">プロジェクト定例会で、営業とエンジニアの意見が真っ向から対立しています。あなたはどう動きますか？</p>
-          <div class="quiz-scenario">
-            「この機能は絶対に今週リリースしてほしい」（営業）<br>
-            「品質が担保できない状態でのリリースは無理です」（エンジニア）<br>
-            ── 会議は膠着状態。ファシリテーターはあなた。
-          </div>
+          <div class="quiz-scenario">「この機能は絶対に今週リリースしてほしい」（営業）<br>「品質が担保できない状態でのリリースは無理です」（エンジニア）<br>──
+            会議は膠着状態。ファシリテーターはあなた。</div>
           <ul class="options-list">
             <li><button class="option-btn" data-q="1" data-opt="A"><span
                   class="opt-key">A</span><span>どちらか一方の判断を仰ぐため、その場で上長に電話する</span></button></li>
@@ -838,19 +786,14 @@
           </ul>
           <div class="feedback" id="fb1">
             <div class="feedback-verdict" id="fv1"></div>
-            <p class="feedback-text" id="ft1"></p>
-            <button class="next-btn" onclick="nextQuestion(2)">次の問題へ →</button>
+            <p class="feedback-text" id="ft1"></p><button class="next-btn" onclick="nextQuestion(2)">次の問題へ →</button>
           </div>
         </div>
 
-        <!-- Q2 -->
         <div class="quiz-card" id="q2">
           <div class="question-label">QUESTION 02 / 03</div>
           <p class="question-text">ステークホルダーへの合意形成で最も重要なタイミングはどれでしょうか？</p>
-          <div class="quiz-scenario">
-            新しい業務フローの変更を、関係部門 3 部署に承認してもらう必要があります。
-            どのタイミングで合意を取りにいくのが最も効果的ですか？
-          </div>
+          <div class="quiz-scenario">新しい業務フローの変更を、関係部門 3 部署に承認してもらう必要があります。どのタイミングで合意を取りにいくのが最も効果的ですか？</div>
           <ul class="options-list">
             <li><button class="option-btn" data-q="2" data-opt="A"><span
                   class="opt-key">A</span><span>全員が揃う大きな会議の場で、一度に提案・承認してもらう</span></button></li>
@@ -863,19 +806,14 @@
           </ul>
           <div class="feedback" id="fb2">
             <div class="feedback-verdict" id="fv2"></div>
-            <p class="feedback-text" id="ft2"></p>
-            <button class="next-btn" onclick="nextQuestion(3)">次の問題へ →</button>
+            <p class="feedback-text" id="ft2"></p><button class="next-btn" onclick="nextQuestion(3)">次の問題へ →</button>
           </div>
         </div>
 
-        <!-- Q3 -->
         <div class="quiz-card" id="q3">
           <div class="question-label">QUESTION 03 / 03</div>
           <p class="question-text">合意後に「聞いていなかった」と言い出す関係者が出た場合、根本的な原因として最も考えられるものはどれでしょうか？</p>
-          <div class="quiz-scenario">
-            先月の会議で全員合意したはずの仕様変更について、今になって
-            「その内容は聞いていなかった」という声が上がりました。
-          </div>
+          <div class="quiz-scenario">先月の会議で全員合意したはずの仕様変更について、今になって「その内容は聞いていなかった」という声が上がりました。</div>
           <ul class="options-list">
             <li><button class="option-btn" data-q="3" data-opt="A"><span
                   class="opt-key">A</span><span>言い出した人の記憶違い・確認不足</span></button></li>
@@ -888,22 +826,18 @@
           </ul>
           <div class="feedback" id="fb3">
             <div class="feedback-verdict" id="fv3"></div>
-            <p class="feedback-text" id="ft3"></p>
-            <button class="next-btn" onclick="showResult()">結果を見る →</button>
+            <p class="feedback-text" id="ft3"></p><button class="next-btn" onclick="showResult()">結果を見る →</button>
           </div>
         </div>
 
-        <!-- 結果 -->
         <div class="result-card" id="resultCard">
           <div class="result-score" id="resultScore"></div>
           <div class="result-label">SCORE / 3問中</div>
           <div class="result-type" id="resultType"></div>
           <p class="result-desc" id="resultDesc"></p>
-          <!-- 結果画面からも参加ボタンに飛べるリンク -->
           <a href="#joinSection" class="result-cta">参加を表明する →</a>
           <button class="retry-btn" onclick="retryQuiz()">もう一度挑戦する</button>
         </div>
-
       </div>
     </div>
   </div>
@@ -916,46 +850,41 @@
 
   <script>
     // =============================================
-    // CounterAPI 設定
-    // namespace と key はリポジトリ公開後に変更してください
-    // 例） namespace: 'your-github-username.github.io'
-    //      key: 'study-session-2026-05'
+    // GAS Web App URL
+    // デプロイ後に取得した URL に書き換えてください
     // =============================================
-    const COUNTER_NAMESPACE = 'shumpeipei.github.io';
-    const COUNTER_KEY = 'study-session-join';
-    const API_BASE = 'https://api.countapi.xyz';
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbzgX1ii3xr3cPyNntg976EN_tvmDfeEog2a5wkK4zI6XcHRvE9cTmZe7j39Q967NTM5Pw/exec';
     const STORAGE_KEY = 'joined_study_session_2026_05';
 
-    // 参加人数を取得して表示
     async function fetchCount() {
       try {
-        const res = await fetch(`${API_BASE}/get/${COUNTER_NAMESPACE}/${COUNTER_KEY}`);
+        const res = await fetch(`${GAS_URL}?action=get`);
         const data = await res.json();
-        document.getElementById('joinCount').textContent = data.value ?? 0;
+        document.getElementById('joinCount').textContent = data.ok ? data.value : '—';
       } catch (e) {
         document.getElementById('joinCount').textContent = '—';
       }
     }
 
-    // 参加ボタン押下処理
     async function handleJoin() {
       const btn = document.getElementById('joinBtn');
       btn.disabled = true;
-
       try {
-        const res = await fetch(`${API_BASE}/hit/${COUNTER_NAMESPACE}/${COUNTER_KEY}`);
+        const res = await fetch(`${GAS_URL}?action=up`);
         const data = await res.json();
-        document.getElementById('joinCount').textContent = data.value;
-        // 押し済みフラグを localStorage に保存（同一ブラウザでの二重カウント防止）
-        localStorage.setItem(STORAGE_KEY, 'true');
-        document.getElementById('joinDoneMsg').classList.add('show');
+        if (data.ok) {
+          document.getElementById('joinCount').textContent = data.value;
+          localStorage.setItem(STORAGE_KEY, 'true');
+          document.getElementById('joinDoneMsg').classList.add('show');
+        } else {
+          throw new Error(data.error);
+        }
       } catch (e) {
         btn.disabled = false;
         alert('通信エラーが発生しました。時間をおいて再度お試しください。');
       }
     }
 
-    // 押し済みの場合はボタンを無効化した状態で表示
     function checkAlreadyJoined() {
       if (localStorage.getItem(STORAGE_KEY)) {
         document.getElementById('joinBtn').disabled = true;
@@ -963,13 +892,9 @@
       }
     }
 
-    // =============================================
-    // クイズ
-    // =============================================
     const quizData = {
       1: {
-        correct: 'B',
-        feedback: {
+        correct: 'B', feedback: {
           A: { ok: false, text: '上長への即時エスカレーションは、ファシリテーターとしての機能を放棄することになります。まずは自分で場を整理する動きが求められます。' },
           B: { ok: true, text: '正解です。対立の背景にある「真の懸念点」を可視化し、双方が納得できる第三の選択肢を探ることが、コーディネーターの核心的な役割です。' },
           C: { ok: false, text: '多数決は意思決定を速めますが、少数意見を切り捨てることになり、後の抵抗や手戻りにつながりやすい手法です。' },
@@ -977,8 +902,7 @@
         }
       },
       2: {
-        correct: 'C',
-        feedback: {
+        correct: 'C', feedback: {
           A: { ok: false, text: '大きな会議の場での初出し提案は、参加者が準備できておらず反発を招きやすい。「根回し」は日本のビジネス文化における重要なコーディネーション技法です。' },
           B: { ok: false, text: 'メール一斉送信は情報共有としては有効ですが、合意形成とは異なります。受け取り側が「読んでいない」「内容を理解していない」まま進むリスクがあります。' },
           C: { ok: true, text: '正解です。事前の個別調整（いわゆる根回し）により、各関係者の懸念点を把握・反映した上で臨む大きな場は、スムーズな合意につながります。' },
@@ -986,8 +910,7 @@
         }
       },
       3: {
-        correct: 'B',
-        feedback: {
+        correct: 'B', feedback: {
           A: { ok: false, text: '個人の記憶違いを原因とすると、再発防止につながりません。プロセスの問題として捉えることが重要です。' },
           B: { ok: true, text: '正解です。「合意した」という事実は、文書化・共有・確認のセットで初めて完結します。議事録の送付と確認期限の設定が再発防止の基本です。' },
           C: { ok: false, text: '参加者数が一因になることもありますが、根本はコミュニケーション・記録のプロセス設計にあります。' },
@@ -996,115 +919,82 @@
       }
     };
 
-    let score = 0;
-    let currentQ = 1;
+    let score = 0, currentQ = 1;
     const answers = {};
 
     function initDots() {
-      const container = document.getElementById('progressDots');
-      container.innerHTML = '';
+      const c = document.getElementById('progressDots');
+      c.innerHTML = '';
       for (let i = 1; i <= 3; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'progress-dot' + (i === 1 ? ' active' : '');
-        dot.id = 'dot' + i;
-        container.appendChild(dot);
+        const d = document.createElement('div');
+        d.className = 'progress-dot' + (i === 1 ? ' active' : '');
+        d.id = 'dot' + i;
+        c.appendChild(d);
       }
     }
 
     function updateDots(q) {
       for (let i = 1; i <= 3; i++) {
-        const dot = document.getElementById('dot' + i);
-        dot.className = 'progress-dot' + (i < q ? ' done' : i === q ? ' active' : '');
+        document.getElementById('dot' + i).className = 'progress-dot' + (i < q ? ' done' : i === q ? ' active' : '');
       }
     }
 
     document.querySelectorAll('.option-btn').forEach(btn => {
       btn.addEventListener('click', function () {
-        const q = parseInt(this.dataset.q);
-        const opt = this.dataset.opt;
+        const q = parseInt(this.dataset.q), opt = this.dataset.opt;
         if (answers[q]) return;
-
         answers[q] = opt;
-        const data = quizData[q];
-        const isCorrect = opt === data.correct;
+        const data = quizData[q], isCorrect = opt === data.correct;
         if (isCorrect) score++;
-
         document.querySelectorAll(`.option-btn[data-q="${q}"]`).forEach(b => {
           b.disabled = true;
           if (b.dataset.opt === data.correct) b.classList.add('correct');
           else if (b.dataset.opt === opt && !isCorrect) b.classList.add('incorrect');
         });
-
-        const fb = document.getElementById('fb' + q);
-        const fv = document.getElementById('fv' + q);
-        const ft = document.getElementById('ft' + q);
-        fv.textContent = isCorrect ? '✓ 正解です' : '✗ 不正解';
-        fv.className = 'feedback-verdict ' + (isCorrect ? 'ok' : 'ng');
-        ft.textContent = data.feedback[opt].text;
-        fb.classList.add('show');
+        document.getElementById('fv' + q).textContent = isCorrect ? '✓ 正解です' : '✗ 不正解';
+        document.getElementById('fv' + q).className = 'feedback-verdict ' + (isCorrect ? 'ok' : 'ng');
+        document.getElementById('ft' + q).textContent = data.feedback[opt].text;
+        document.getElementById('fb' + q).classList.add('show');
       });
     });
 
     function nextQuestion(n) {
       document.getElementById('q' + (n - 1)).classList.remove('active');
       document.getElementById('q' + n).classList.add('active');
-      currentQ = n;
-      updateDots(n);
+      currentQ = n; updateDots(n);
       window.scrollTo({ top: document.querySelector('.quiz-section').offsetTop - 20, behavior: 'smooth' });
     }
 
     function showResult() {
       document.getElementById('q3').classList.remove('active');
       document.getElementById('progressDots').style.display = 'none';
-
-      const card = document.getElementById('resultCard');
-      card.classList.add('show');
+      document.getElementById('resultCard').classList.add('show');
       document.getElementById('resultScore').textContent = score;
-
-      let type, desc;
-      if (score === 3) {
-        type = '熟練のコーディネーター型';
-        desc = '3問すべて正解です。合意形成の基本原則をしっかり押さえています。本勉強会では、さらに複雑なマルチステークホルダー場面の応用スキルを学びましょう。';
-      } else if (score === 2) {
-        type = '実践経験者型';
-        desc = '概ねコーディネーションの勘所を掴んでいます。あと一歩の理解で、より確実に合意を引き出せるようになります。本勉強会で弱点を補強しましょう。';
-      } else if (score === 1) {
-        type = '成長フェーズ型';
-        desc = 'コーディネーションへの意識はあるものの、場面に応じた手法の選択に伸びしろがあります。本勉強会で体系的なフレームワークを学ぶことで、大きく変わります。';
-      } else {
-        type = 'スキルアップ候補者型';
-        desc = '今まさに学ぶタイミングです。本勉強会は、コーディネーション・合意形成の基礎から実践まで、一から丁寧に学べる内容になっています。ぜひご参加ください。';
-      }
-
-      document.getElementById('resultType').textContent = type;
-      document.getElementById('resultDesc').textContent = desc;
+      const types = [
+        ['スキルアップ候補者型', '今まさに学ぶタイミングです。本勉強会は、コーディネーション・合意形成の基礎から実践まで、一から丁寧に学べる内容になっています。ぜひご参加ください。'],
+        ['成長フェーズ型', 'コーディネーションへの意識はあるものの、場面に応じた手法の選択に伸びしろがあります。本勉強会で体系的なフレームワークを学ぶことで、大きく変わります。'],
+        ['実践経験者型', '概ねコーディネーションの勘所を掴んでいます。あと一歩の理解で、より確実に合意を引き出せるようになります。本勉強会で弱点を補強しましょう。'],
+        ['熟練のコーディネーター型', '3問すべて正解です。合意形成の基本原則をしっかり押さえています。本勉強会では、さらに複雑なマルチステークホルダー場面の応用スキルを学びましょう。'],
+      ];
+      document.getElementById('resultType').textContent = types[score][0];
+      document.getElementById('resultDesc').textContent = types[score][1];
       window.scrollTo({ top: document.querySelector('.quiz-section').offsetTop - 20, behavior: 'smooth' });
     }
 
     function retryQuiz() {
-      score = 0;
-      Object.keys(answers).forEach(k => delete answers[k]);
+      score = 0; Object.keys(answers).forEach(k => delete answers[k]);
       document.getElementById('resultCard').classList.remove('show');
       document.getElementById('progressDots').style.display = 'flex';
       document.querySelectorAll('.quiz-card').forEach(c => c.classList.remove('active'));
-      document.querySelectorAll('.option-btn').forEach(b => {
-        b.disabled = false;
-        b.className = 'option-btn';
-      });
+      document.querySelectorAll('.option-btn').forEach(b => { b.disabled = false; b.className = 'option-btn'; });
       document.querySelectorAll('.feedback').forEach(f => f.classList.remove('show'));
       document.getElementById('q1').classList.add('active');
-      currentQ = 1;
-      initDots();
+      currentQ = 1; initDots();
     }
 
-    // スクロールアニメーション
-    const observerTargets = document.querySelectorAll('section, .join-section');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    observerTargets.forEach(s => observer.observe(s));
+    const observer = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+    document.querySelectorAll('section, .join-section').forEach(s => observer.observe(s));
 
-    // 初期化
     initDots();
     fetchCount();
     checkAlreadyJoined();
